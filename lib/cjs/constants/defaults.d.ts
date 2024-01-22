@@ -1,0 +1,12 @@
+import { SystemPromptConfig } from '../types';
+import { scaledProperties } from '../writingStyle';
+import { Mode } from './mode';
+type ScaledPropertyKeys = keyof typeof scaledProperties;
+export declare const DEFAULT_MODE = Mode.Extend;
+export declare const DEFAULT_CONTEXT: () => string;
+export declare const DEFAULT_GOAL: (mode?: Mode[]) => string;
+export declare const DEFAULT_RULES: () => string[];
+export declare const DEFAULT_PROPERTY_LEVEL = 5;
+export declare const SCALED_PROPERTY_LIST: ScaledPropertyKeys[];
+export declare const systemPromptConfig: SystemPromptConfig;
+export {};
