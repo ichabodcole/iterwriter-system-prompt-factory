@@ -1,0 +1,23 @@
+export enum Style {
+  Expository = 'Expository',
+  Descriptive = 'Descriptive',
+  Narrative = 'Narrative',
+  Persuasive = 'Persuasive',
+  Poetic = 'Poetic',
+  Ornate = 'Ornate',
+  Flowery = 'Flowery',
+  Plain = 'Plain',
+  Formal = 'Formal',
+  Informal = 'Informal',
+  Casual = 'Casual',
+  Conversational = 'Conversational',
+  Technical = 'Technical',
+  Scientific = 'Scientific',
+  Journalistic = 'Journalistic',
+  Academic = 'Academic',
+  Business = 'Business',
+  Legal = 'Legal',
+  Medical = 'Medical',
+  StreamOfConsciousness = 'Stream of Consciousness',
+  Experimental = 'Experimental'
+}
