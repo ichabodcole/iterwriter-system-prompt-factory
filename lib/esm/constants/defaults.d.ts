@@ -8,5 +8,5 @@ export declare const createGoal: (mode?: Mode[]) => string;
 export declare const createRules: (rules?: string[]) => string[];
 export declare const DEFAULT_PROPERTY_LEVEL = 5;
 export declare const SCALED_PROPERTY_LIST: ScaledPropertyKeys[];
-export declare const createSystemPromptConfig: (overrides?: SystemPromptConfig) => SystemPromptConfig;
+export declare const createSystemPromptConfig: (overrides?: Partial<SystemPromptConfig>) => SystemPromptConfig;
 export {};

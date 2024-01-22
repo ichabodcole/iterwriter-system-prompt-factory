@@ -19,7 +19,9 @@ export const createRules = (rules?: string[]) => [
 export const DEFAULT_PROPERTY_LEVEL = 5
 export const SCALED_PROPERTY_LIST: ScaledPropertyKeys[] = ['verbosity', 'creativity']
 
-export const createSystemPromptConfig = (overrides?: SystemPromptConfig): SystemPromptConfig => {
+export const createSystemPromptConfig = (
+  overrides?: Partial<SystemPromptConfig>
+): SystemPromptConfig => {
   return {
     context: DEFAULT_CONTEXT,
     goal: createGoal(),
