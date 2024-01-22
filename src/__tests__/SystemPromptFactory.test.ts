@@ -1,5 +1,5 @@
 import { SystemPromptFactory } from '../SystemPromptFactory'
-import { systemPromptConfig } from '../constants/defaults'
+import { createSystemPromptConfig } from '../constants/defaults'
 import { Genre } from '../constants/genre'
 import { Mode } from '../constants/mode'
 import { POV } from '../constants/pov'
@@ -7,7 +7,7 @@ import { Style } from '../constants/style'
 import { Theme } from '../constants/theme'
 import { Tone } from '../constants/tone'
 import { SystemPromptConfig } from '../types'
-import { scaledProperties } from '../writingStyle'
+import { scaledProperties } from '../constants/scaledProperties'
 
 describe('SystemPromptFactory', () => {
   let precedingText: string
@@ -17,7 +17,7 @@ describe('SystemPromptFactory', () => {
   let spf: SystemPromptFactory
 
   beforeEach(() => {
-    config = systemPromptConfig
+    config = createSystemPromptConfig()
     config.writingStyle.genre = [Genre.Horror, Genre.Mystery]
     config.writingStyle.tone = [Tone.Dark, Tone.Sarcastic]
     config.writingStyle.style = [Style.Poetic, Style.Descriptive]
@@ -242,7 +242,7 @@ describe('SystemPromptFactory', () => {
         expect(systemPrompt).toContain(precedingText2)
       })
 
-      xit('should have a value of "NA" if no preceding text is provided', () => {
+      it('should have a value of "NA" if no preceding text is provided', () => {
         const systemPrompt = spf.createPrompt(seedText)
 
         expect(systemPrompt).toContain(`# PRECEDING TEXT (directly before the SEED TEXT)\nNA\n\n`)
