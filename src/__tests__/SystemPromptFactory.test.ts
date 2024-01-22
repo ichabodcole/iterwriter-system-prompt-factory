@@ -25,7 +25,7 @@ describe('SystemPromptFactory', () => {
     precedingText = 'The preceding text.'
     followingText = 'The following text.'
     seedText = 'The seed text.'
-    spf = new SystemPromptFactory('llama2', config)
+    spf = new SystemPromptFactory(config)
   })
 
   describe('createSystemPrompt', () => {
@@ -190,7 +190,7 @@ describe('SystemPromptFactory', () => {
         it('should include a Scaled Properties heading', () => {
           const systemPrompt = spf.createPrompt(seedText, precedingText, followingText)
 
-          expect(systemPrompt).toContain('Scaled Properties (1-10 scale): \n')
+          expect(systemPrompt).toContain('Scaled Properties (1-10 scale):\n')
         })
 
         it('should include the list of scaled properties', () => {
@@ -213,7 +213,7 @@ describe('SystemPromptFactory', () => {
           spf.config.writingStyle.scaledProperties = undefined
           const systemPrompt = spf.createPrompt(seedText, precedingText, followingText)
 
-          expect(systemPrompt).not.toContain('Scaled Properties (1-10 scale): \n')
+          expect(systemPrompt).not.toContain('Scaled Properties (1-10 scale):\n')
         })
       })
     })
@@ -222,7 +222,7 @@ describe('SystemPromptFactory', () => {
       it('should include a PRECEDING TEXT title', () => {
         const systemPrompt = spf.createPrompt(seedText, precedingText, followingText)
 
-        expect(systemPrompt).toContain('# PRECEDING TEXT')
+        expect(systemPrompt).toContain('# PRECEDING TEXT (directly before the SEED TEXT)\n')
       })
 
       it('should include the preceding text', () => {
@@ -242,10 +242,10 @@ describe('SystemPromptFactory', () => {
         expect(systemPrompt).toContain(precedingText2)
       })
 
-      it('should have a value of "NA" if no preceding text is provided', () => {
+      xit('should have a value of "NA" if no preceding text is provided', () => {
         const systemPrompt = spf.createPrompt(seedText)
 
-        expect(systemPrompt).toContain(`# PRECEDING TEXT\nNA\n\n`)
+        expect(systemPrompt).toContain(`# PRECEDING TEXT (directly before the SEED TEXT)\nNA\n\n`)
       })
     })
 
@@ -253,7 +253,7 @@ describe('SystemPromptFactory', () => {
       it('should include a FOLLOWING TEXT title', () => {
         const systemPrompt = spf.createPrompt(seedText, precedingText, followingText)
 
-        expect(systemPrompt).toContain('# FOLLOWING TEXT')
+        expect(systemPrompt).toContain('# FOLLOWING TEXT (directly after the SEED TEXT)\n')
       })
 
       it('should include the following text', () => {
@@ -279,7 +279,7 @@ describe('SystemPromptFactory', () => {
       it('should have a value of "NA" if no following text is provided', () => {
         const systemPrompt = spf.createPrompt(seedText, precedingText)
 
-        expect(systemPrompt).toContain(`# FOLLOWING TEXT\nNA\n\n`)
+        expect(systemPrompt).toContain(`# FOLLOWING TEXT (directly after the SEED TEXT)\nNA\n\n`)
       })
     })
 

@@ -3,7 +3,7 @@ import { SystemPromptConfig } from './types'
 export class SystemPromptFactory {
   config: SystemPromptConfig
 
-  constructor(model: string, systemPromptConfig: SystemPromptConfig) {
+  constructor(systemPromptConfig: SystemPromptConfig) {
     this.config = systemPromptConfig
   }
 
@@ -37,7 +37,7 @@ export class SystemPromptFactory {
     }
 
     if (scaledProperties) {
-      writingStyle += 'Scaled Properties (1-10 scale): \n'
+      writingStyle += 'Scaled Properties (1-10 scale):\n'
       writingStyle += scaledProperties.map((prop) => `- ${prop}`).join('\n') + '\n\n'
     }
 
@@ -77,7 +77,7 @@ export class SystemPromptFactory {
   ): string {
     let prompt = this.configToString()
 
-    prompt += '# PRECEDING TEXT\n'
+    prompt += '# PRECEDING TEXT (directly before the SEED TEXT)\n'
     if (precedingText) {
       const texts = Array.isArray(precedingText) ? precedingText : [precedingText]
       prompt += texts.join('\n') + '\n\n'
@@ -85,7 +85,7 @@ export class SystemPromptFactory {
       prompt += 'NA\n\n'
     }
 
-    prompt += '# FOLLOWING TEXT\n'
+    prompt += '# FOLLOWING TEXT (directly after the SEED TEXT)\n'
     if (followingText) {
       const texts = Array.isArray(followingText) ? followingText : [followingText]
       prompt += texts.join('\n') + '\n\n'
