@@ -1,4 +1,5 @@
-import { SystemPromptConfig } from './types'
+import { ScaledPropertyName, scaledProperties } from './constants/scaledProperties'
+import { ScaledPropertiesConfig, SystemPromptConfig } from './types'
 
 export class SystemPromptFactory {
   __config: SystemPromptConfig
@@ -16,6 +17,14 @@ export class SystemPromptFactory {
       ...this.__config,
       ...config
     }
+  }
+
+  private scaledPropertiesToString(scaledPropertiesConfig: ScaledPropertiesConfig): string {
+    return Object.entries(scaledPropertiesConfig).reduce((acc, [key, value]) => {
+      acc += `- ${scaledProperties[key as ScaledPropertyName](value)}\n`
+
+      return acc
+    }, '')
   }
 
   private writingStyleToString(): string {
@@ -49,7 +58,7 @@ export class SystemPromptFactory {
 
     if (scaledProperties) {
       writingStyle += 'Scaled Properties (1-10 scale):\n'
-      writingStyle += scaledProperties.map((prop) => `- ${prop}`).join('\n') + '\n\n'
+      writingStyle += this.scaledPropertiesToString(scaledProperties) + '\n\n'
     }
 
     return writingStyle

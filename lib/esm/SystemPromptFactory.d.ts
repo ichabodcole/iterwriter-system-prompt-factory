@@ -4,6 +4,7 @@ export declare class SystemPromptFactory {
     constructor(systemPromptConfig: SystemPromptConfig);
     get config(): SystemPromptConfig;
     set config(config: Partial<SystemPromptConfig>);
+    private scaledPropertiesToString;
     private writingStyleToString;
     createSystemPrompt(): string;
     createPrompt(seedText: string, precedingText?: string | string[], followingText?: string | string[]): string;

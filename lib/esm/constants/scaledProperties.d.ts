@@ -1,3 +1,4 @@
+export type ScaledPropertyName = keyof typeof scaledProperties;
 export declare const scaledProperties: {
     contentLength: (length: number) => string;
     lexicalComplexity: (level: number) => string;

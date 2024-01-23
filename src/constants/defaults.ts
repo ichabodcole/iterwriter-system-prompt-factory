@@ -1,8 +1,6 @@
 import { SystemPromptConfig } from '../types'
-import { scaledProperties } from './scaledProperties'
+import { ScaledPropertyName } from './scaledProperties'
 import { Mode } from './mode'
-
-type ScaledPropertyKeys = keyof typeof scaledProperties
 
 export const DEFAULT_MODE = Mode.Extend
 export const DEFAULT_CONTEXT =
@@ -13,11 +11,11 @@ export const createRules = (rules?: string[]) => [
   'ALWAYS generate text that aligns with the specified WRITING STYLE properties.',
   'Ensure that the iteration is coherent, maintaining the narrative flow and respecting the context established by the SEED TEXT.',
   'The iteration should seamlessly integrate with the PRECEDING TEXT and FOLLOWING TEXT, when provided in the prompt.',
-  'Do NOT include any meta explanations or external commentary in the response.',
+  'NEVER include any meta explanations, introductions, or external commentary regarding your response.',
   ...(rules || []) // Add any additional
 ]
 export const DEFAULT_PROPERTY_LEVEL = 5
-export const SCALED_PROPERTY_LIST: ScaledPropertyKeys[] = ['verbosity', 'creativity']
+export const SCALED_PROPERTY_LIST: ScaledPropertyName[] = ['verbosity', 'creativity']
 
 export const createSystemPromptConfig = (
   overrides?: Partial<SystemPromptConfig>
@@ -27,9 +25,10 @@ export const createSystemPromptConfig = (
     goal: createGoal(),
     rules: createRules(),
     writingStyle: {
-      scaledProperties: SCALED_PROPERTY_LIST.map((property) =>
-        scaledProperties[property](DEFAULT_PROPERTY_LEVEL)
-      )
+      scaledProperties: {
+        verbosity: DEFAULT_PROPERTY_LEVEL,
+        creativity: DEFAULT_PROPERTY_LEVEL
+      }
     },
     ...overrides
   }

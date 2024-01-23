@@ -195,18 +195,18 @@ describe('SystemPromptFactory', () => {
 
         it('should include the list of scaled properties', () => {
           const systemPrompt = spf.createSystemPrompt()
-          const scaledPropertiesStringList = config.writingStyle?.scaledProperties
-            ?.map((prop) => `- ${prop}`)
-            .join('\n')
+          const scaledPropertiesString = `- ${scaledProperties.verbosity(5)}\n- ${scaledProperties.creativity(5)}\n`
 
-          expect(systemPrompt).toContain(scaledPropertiesStringList as string)
+          expect(systemPrompt).toContain(scaledPropertiesString)
         })
 
         it('should include the scaled property values', () => {
-          spf.config.writingStyle.scaledProperties = [scaledProperties.contentLength(2)]
+          spf.config.writingStyle.scaledProperties = { contentLength: 2 }
           const systemPrompt = spf.createSystemPrompt()
 
-          expect(systemPrompt).toContain('Content Length: 2 (controls the length of the response)')
+          expect(systemPrompt).toContain(
+            '- Content Length: 2 (controls the length of the response)'
+          )
         })
 
         it('should not be present if no scaled properties are provided', () => {

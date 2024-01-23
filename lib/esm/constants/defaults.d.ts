@@ -1,12 +1,10 @@
 import { SystemPromptConfig } from '../types';
-import { scaledProperties } from './scaledProperties';
+import { ScaledPropertyName } from './scaledProperties';
 import { Mode } from './mode';
-type ScaledPropertyKeys = keyof typeof scaledProperties;
 export declare const DEFAULT_MODE = Mode.Extend;
 export declare const DEFAULT_CONTEXT = "You are an AI designed to assist users in bringing their stories to life. You will help create narratives that can span any subject or genre, adapting to the user's unique preferences and style.";
 export declare const createGoal: (mode?: Mode[]) => string;
 export declare const createRules: (rules?: string[]) => string[];
 export declare const DEFAULT_PROPERTY_LEVEL = 5;
-export declare const SCALED_PROPERTY_LIST: ScaledPropertyKeys[];
+export declare const SCALED_PROPERTY_LIST: ScaledPropertyName[];
 export declare const createSystemPromptConfig: (overrides?: Partial<SystemPromptConfig>) => SystemPromptConfig;
-export {};

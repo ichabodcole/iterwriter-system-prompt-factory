@@ -1,3 +1,5 @@
+export type ScaledPropertyName = keyof typeof scaledProperties
+
 export const scaledProperties = {
   contentLength: (length: number) =>
     `Content Length: ${length} (controls the length of the response)`,
