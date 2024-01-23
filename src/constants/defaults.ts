@@ -12,7 +12,7 @@ export const createGoal = (mode: Mode[] = [Mode.Iterate]) =>
 export const createRules = (rules?: string[]) => [
   'ALWAYS generate text that aligns with the specified WRITING STYLE properties.',
   'Ensure that the iteration is coherent, maintaining the narrative flow and respecting the context established by the SEED TEXT.',
-  'The iteration should seamlessly integrate with the PRECEDING TEXT and FOLLOWING TEXT, when available. The text "NA" will be used if no context is available.',
+  'The iteration should seamlessly integrate with the PRECEDING TEXT and FOLLOWING TEXT, when provided in the prompt.',
   'Do NOT include any meta explanations or external commentary in the response.',
   ...(rules || []) // Add any additional
 ]

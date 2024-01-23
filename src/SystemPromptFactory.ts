@@ -1,10 +1,21 @@
 import { SystemPromptConfig } from './types'
 
 export class SystemPromptFactory {
-  config: SystemPromptConfig
+  __config: SystemPromptConfig
 
   constructor(systemPromptConfig: SystemPromptConfig) {
-    this.config = systemPromptConfig
+    this.__config = systemPromptConfig
+  }
+
+  get config(): SystemPromptConfig {
+    return this.__config
+  }
+
+  set config(config: Partial<SystemPromptConfig>) {
+    this.__config = {
+      ...this.__config,
+      ...config
+    }
   }
 
   private writingStyleToString(): string {
@@ -44,7 +55,7 @@ export class SystemPromptFactory {
     return writingStyle
   }
 
-  private configToString(): string {
+  public createSystemPrompt(): string {
     return Object.entries(this.config).reduce((acc, [key, value]) => {
       // writingStyle is a special case
       if (key === 'writingStyle') {
@@ -61,9 +72,9 @@ export class SystemPromptFactory {
 
       if (Array.isArray(value)) {
         acc += value.map((v) => `- ${v}`).join('\n')
-        acc += '\n\n'
+        acc += '\n'
       } else {
-        acc += value + '\n\n'
+        acc += value + '\n'
       }
 
       return acc
@@ -75,28 +86,22 @@ export class SystemPromptFactory {
     precedingText?: string | string[],
     followingText?: string | string[]
   ): string {
-    let prompt = this.configToString()
+    let prompt = ''
 
-    prompt += '# PRECEDING TEXT (directly before the SEED TEXT)\n'
     if (precedingText) {
+      prompt += '# PRECEDING TEXT\n'
       const texts = Array.isArray(precedingText) ? precedingText : [precedingText]
       prompt += texts.join('\n') + '\n\n'
-    } else {
-      prompt += 'NA\n\n'
     }
 
-    prompt += '# FOLLOWING TEXT (directly after the SEED TEXT)\n'
     if (followingText) {
+      prompt += '# FOLLOWING TEXT\n'
       const texts = Array.isArray(followingText) ? followingText : [followingText]
       prompt += texts.join('\n') + '\n\n'
-    } else {
-      prompt += 'NA\n\n'
     }
 
     prompt += '# SEED TEXT\n'
-    prompt += seedText + '\n\n'
-
-    prompt += '# END SYSTEM PROMPT\n'
+    prompt += seedText + '\n'
 
     return prompt
   }
