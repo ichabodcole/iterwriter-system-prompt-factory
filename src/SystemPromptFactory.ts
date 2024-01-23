@@ -81,9 +81,9 @@ export class SystemPromptFactory {
 
       if (Array.isArray(value)) {
         acc += value.map((v) => `- ${v}`).join('\n')
-        acc += '\n'
+        acc += '\n\n'
       } else {
-        acc += value + '\n'
+        acc += value + '\n\n'
       }
 
       return acc
