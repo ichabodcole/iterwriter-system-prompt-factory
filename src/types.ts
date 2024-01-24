@@ -8,19 +8,21 @@ import { Tone } from './constants/tone'
 
 export type ScaledPropertiesConfig = Partial<Record<ScaledPropertyName, number>>
 
+export interface WritingStyle {
+  mode?: Mode[]
+  genre?: Genre[]
+  theme?: Theme[]
+  tone?: Tone[]
+  style?: Style[]
+  pov?: POV
+  scaledProperties?: ScaledPropertiesConfig
+}
+
 export interface SystemPromptConfig {
   context: string
   goal: string
   rules: string[]
-  writingStyle: {
-    mode?: Mode[]
-    genre?: Genre[]
-    theme?: Theme[]
-    tone?: Tone[]
-    style?: Style[]
-    pov?: POV
-    scaledProperties?: ScaledPropertiesConfig
-  }
+  writingStyle: WritingStyle
   customInstructions?: string
 }
 
